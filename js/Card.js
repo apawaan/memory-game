@@ -14,12 +14,13 @@
  */
 MemoryGame.Card = function(value, isMatchingCard) {
   this.value = value;
-  this.isRevealed = false;
+  this.isRevealed = true;
+
   if (isMatchingCard) {
     this.isMatchingCard = true;
   }
 
-  this.reveal = function() {
+ this.reveal = function() {
     this.isRevealed = true;
   }
 

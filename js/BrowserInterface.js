@@ -56,11 +56,8 @@
     var status = $.play(this.index);
     console.log(status);
 
-    if (status.code != 0 ) {
-      this.classList.toggle('clicked');
-    }
-
-    if (status.code == 3 ) {
+    // If you found the matching spectogram, remove from options
+    if (status.code == 2) {
       setTimeout(function () {
         var childNodes = document.getElementById('memory--cards').childNodes;
         childNodes[status.args[0]].classList.remove('clicked');
@@ -77,7 +74,6 @@
 
       document.getElementById("memory--end-game-modal").classList.toggle('show');
     }
-
   };
 
   var getEndGameMessage = function(score) {

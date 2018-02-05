@@ -94,8 +94,8 @@ var MemoryGame = {
 
   /**
    * Rearrange elements in cards array
-   * @return Reference to self object
-   */
+   * @return Reference to self object */
+
   shuffleCards: function() {
     var cards = this.cards;
     var shuffledCards = [];
@@ -133,79 +133,101 @@ var MemoryGame = {
    */
   play: (function() {
     var cardSelection = [];
-    var revealedCards = 0;
-    var revealedValues = [];
+    var chosenCards = 0;
+    var chosenValues = [];
 
     return function(index) {
       var status = {};
       var value = this.cards[index].value;
+      var audio;
 
-      if (!this.cards[index].isRevealed) {
-        this.cards[index].reveal();
+                  //audio.play();
+
+      // If selected card is flipped
+      if (this.cards[index].isRevealed) {
+
+
+        // if statements that play sound
+        if (value == 1)
+        {
+          audio = new Audio('texttone.mp3');
+          audio.play();
+        }
+        else if (value == 2)
+        {
+          audio = new Audio('honk.mp3');
+          audio.play();
+        }
+        else if (value == 3)
+        {
+          audio = new Audio('keys.mp3');
+          audio.play();
+        }
+        else if (value == 4)
+        {
+          audio = new Audio('meow.mp3');
+          audio.play();
+        }
+        else if (value == 5)
+        {
+          audio = new Audio('clock.mp3');
+          audio.play();
+        }
+        else
+        {
+          audio = new Audio('cry.mp3');
+          audio.play();
+        }
+
+        // Add card to cardSelection array
         cardSelection.push(index);
+
+        // if two cards have been chosen
         if (cardSelection.length == 2) {
           this.attempts++;
+
+          // If the two cards selected are not a match
           if (this.cards[cardSelection[0]].value !=
               this.cards[cardSelection[1]].value) {
-            // No match
-            this.cards[cardSelection[0]].conceal();
-            this.cards[cardSelection[1]].conceal();
-            /**
-             * Algorithm to determine a mistake.
-             * Check if the pair of at least
-             * one card has been revealed before
-             *
-             * indexOf return -1 if value is not found
-             */
-            var isMistake = false;
-
-            if (revealedValues.indexOf(this.cards[cardSelection[0]].value) === -1) {
-              revealedValues.push(this.cards[cardSelection[0]].value);
-            }
-            else {
-              isMistake = true;
-            }
-
-            if (revealedValues.indexOf(this.cards[cardSelection[1]].value) === -1) {
-              revealedValues.push(this.cards[cardSelection[1]].value);
-            }
-
-            if (isMistake) {
-              this.mistakes++;
-            }
-
-            revealedValues.push(this.cards[cardSelection[0]].value);
 
             status.code = 3,
-            status.message = 'No Match. Conceal cards.';
-            status.args = cardSelection;
+            status.message = 'No Match.';
           }
+
+          // if the cards do match, check if you got all of thems
           else {
-            revealedCards += 2;
-            if (revealedCards == this.cards.length) {
+            chosenCards += 2;
+
+            if (chosenCards == this.cards.length) {
               // Game over
               this.isGameOver = true;
-              revealedCards = 0;
-              revealedValues = [];
+              chosenCards = 0;
+              chosenValues = [];
               status.code = 4,
               status.message = 'GAME OVER! Attempts: ' + this.attempts +
                   ', Mistakes: ' + this.mistakes;
             }
+
+            // if there are still cards left, dictate it as a match
             else {
               status.code = 2,
               status.message = 'Match.';
+              status.args = cardSelection;
             }
+
           }
           cardSelection = [];
         }
+        // if one card was selected
         else {
           status.code = 1,
-          status.message = 'Flip first card.';
+          status.message = 'Waiting for second card';
         }
       }
+      // if selected card isn't revealed/ has been chosen
       else {
         status.code = 0,
-        status.message = 'Card is already facing up.';
+        status.message = 'Choose another card';
       }
 
       return status;
