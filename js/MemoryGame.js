@@ -1,11 +1,12 @@
 /**
+ * Revisions by: Angelynne Pawaan
+ * Project: Memory Workout - Everyday Sounds
+ *
  * Author: Maximo Mena
  * GitHub: mmenavas
  * Twitter: @menamaximo
  * Project: Memory Workout
  * Description: This is a memory game written in pure JavaScript.
- * The goal is to match pairs of cards in the least
- * number of matching attempts.
  */
 
 /**
@@ -173,10 +174,20 @@ var MemoryGame = {
           audio = new Audio('clock.mp3');
           audio.play();
         }
-        else
+        else if (value == 6)
         {
           audio = new Audio('cry.mp3');
           audio.play();
+        }
+        else if (value == 7)
+        {
+          audio = new Audio('cough.mp3');
+          audio.play();
+        }
+        else
+        {
+            audio = new Audio('woo.mp3');
+            audio.play();
         }
 
         // Add card to cardSelection array

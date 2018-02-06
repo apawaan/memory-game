@@ -1,8 +1,10 @@
 /**
+ * Revisions by: Angelynne Pawaan
+ * Project: Memory Workout - Everyday Sounds
+ *
  * Author: Maximo Mena
  * GitHub: mmenavas
  * Twitter: @menamaximo
- * Project: Memory Workout
  * Description: The game interface
  */
 

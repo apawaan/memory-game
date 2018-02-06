@@ -1,4 +1,6 @@
-# Fruit Matcher
-HTML5, CSS3 and Javascript memory game.
+# Everyday Sounds
+HTML5, CSS3 and Javascript memory game based off of mmenavas's memory game
+that can be found on http://mmenavas.github.io/memory-game. Match each
+spectrogram to the sound associated to such on the photo.
 
-Play this game on http://mmenavas.github.io/memory-game
+Angelynne Pawaan
